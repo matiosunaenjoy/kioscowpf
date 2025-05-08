@@ -1,0 +1,386 @@
+﻿<Window x:Class="KioscoAutogestion.Baluma.Casino.App.Views.MainDashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:KioscoAutogestion.Baluma.Casino.App.Views"
+        xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
+
+    mc:Ignorable="d"
+    Title="MainDashboard" Height="700" Width="1000"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize">
+
+<Window.Resources>
+    <!-- Converter -->
+    <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+    <!-- Estilos existentes… (omito para brevedad: CircleButtonStyle, ActionButtonStyle, etc.) -->
+
+    <!-- Nuevo estilo para las tarjetas como Button -->
+    <Style x:Key="OptionCardButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#1D1F2A"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="Height" Value="350"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="16">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</Window.Resources>
+
+<Border Background="#151723" CornerRadius="20" Padding="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header -->
+            <RowDefinition Height="*"/>
+            <!-- Opciones / Contenido -->
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                    Text="Bienvenido Enjoy Punta del Este"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,20"/>
+
+        <!-- Zona de Opciones y Contenido -->
+        <Grid Grid.Row="1">
+            <!-- Panel de opciones (tarjetas-botón) -->
+            <UniformGrid x:Name="OptionsPanel"
+                            Rows="2" Columns="3"
+                            Visibility="{Binding IsOptionsVisible, Converter={StaticResource BoolToVis}}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                <!-- Home / Beneficios -->
+                <Button Height="250"  Style="{StaticResource OptionCardButtonStyle}"
+                        Command="{Binding NavigateSyncCommand}"
+                        CommandParameter="DashboardHome">
+                    <!-- Copia aquí el contenido de tu tarjeta original -->
+                    <Grid>
+                        <!-- Ellipses y TextBlocks idénticos -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Ellipse Width="130" Height="130" Fill="#243233">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="1.5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Ellipse Width="110" Height="110" Fill="#2f5850"/>
+                        <Ellipse Width="80" Height="80">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#74d434" Offset="0"/>
+                                    <GradientStop Color="#31d1d5" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                            <TextBlock Text="🎖️"
+                                    FontSize="36"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="White"/>
+                        <TextBlock Grid.Row="1"
+                                    Text="Beneficios"
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,10,0,0"/>
+                        <TextBlock Grid.Row="2"
+                                    Text="Accede a tus beneficios actuales"
+                                    FontSize="13"
+                                    Foreground="#AAAAAA"
+                                    HorizontalAlignment="Center"
+                                    TextAlignment="Center"
+                                    TextWrapping="Wrap"
+                                    Margin="20,0,20,0"/>
+                    </Grid>
+                </Button>
+
+                <!-- Puntos -->
+                    <Button Height="250" Style="{StaticResource OptionCardButtonStyle}"
+                        Command="{Binding NavigateSyncCommand}"
+                        CommandParameter="DashboardPoints">
+                    <!-- Repite la estructura: icono, título, subtítulo -->
+                    <Grid>
+                        <!-- Ellipses y TextBlocks idénticos -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Ellipse Width="130" Height="130" Fill="#3c1f3b">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="1.5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Ellipse Width="110" Height="110" Fill="#562755"/>
+                        <Ellipse Width="80" Height="80">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#f12874" Offset="0"/>
+                                    <GradientStop Color="#9b46d7" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                            <TextBlock Text="🏴󠁴󠁴󠁰󠁴󠁦󠁿"
+                            FontSize="36"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="White"/>
+                                        <TextBlock Grid.Row="1"
+                            Text="Puntos"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+                            Margin="0,10,0,0"/>
+                        <TextBlock Grid.Row="2"
+                            Text="Accede a tus beneficios actuales"
+                            FontSize="13"
+                            Foreground="#AAAAAA"
+                            HorizontalAlignment="Center"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="20,0,20,0"/>
+                    </Grid>
+                    <!-- … -->
+                </Button>
+
+                <!-- Premios -->
+                    <Button Height="250" Style="{StaticResource OptionCardButtonStyle}"
+                        Command="{Binding NavigateSyncCommand}"
+                        CommandParameter="DashboardPrizes">
+                    <!-- … -->
+                    <Grid>
+                        <!-- Ellipses y TextBlocks idénticos -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Ellipse Width="130" Height="130" Fill="#FF673F27">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="1.5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Ellipse Width="110" Height="110" Fill="#FFB34B3A"/>
+                        <Ellipse Width="80" Height="80">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#fc9753" Offset="0"/>
+                                    <GradientStop Color="#fc6fb3" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                            <TextBlock Text="🏆"
+            FontSize="36"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"/>
+                        <TextBlock Grid.Row="1"
+            Text="Premios"
+            FontSize="20"
+            FontWeight="SemiBold"
+            Foreground="White"
+            HorizontalAlignment="Center"
+            Margin="0,10,0,0"/>
+                        <TextBlock Grid.Row="2"
+            Text="Accede a tus beneficios actuales"
+            FontSize="13"
+            Foreground="#AAAAAA"
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap"
+            Margin="20,0,20,0"/>
+                    </Grid>
+                </Button>
+
+                <!-- Ruta -->
+                    <Button Height="250" Style="{StaticResource OptionCardButtonStyle}"
+                        Command="{Binding NavigateSyncCommand}"
+                        CommandParameter="DashboardRoute">
+                    <!-- … -->
+                    <Grid>
+                        <!-- Ellipses y TextBlocks idénticos -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Ellipse Width="130" Height="130" Fill="#392e36">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="1.5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Ellipse Width="110" Height="110" Fill="#605126"/>
+                        <Ellipse Width="80" Height="80">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#ff9b46" Offset="0"/>
+                                    <GradientStop Color="#fec30d" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                            <TextBlock Text="🚀"
+            FontSize="36"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"/>
+                        <TextBlock Grid.Row="1"
+            Text="Ruta Enjoy"
+            FontSize="20"
+            FontWeight="SemiBold"
+            Foreground="White"
+            HorizontalAlignment="Center"
+            Margin="0,10,0,0"/>
+                        <TextBlock Grid.Row="2"
+            Text="Accede a tus beneficios actuales"
+            FontSize="13"
+            Foreground="#AAAAAA"
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap"
+            Margin="20,0,20,0"/>
+                    </Grid>
+                </Button>
+
+                <!-- Beneficios extra / Otro -->
+                    <Button Height="250" Style="{StaticResource OptionCardButtonStyle}"
+                        Command="{Binding NavigateSyncCommand}"
+                        CommandParameter="DashboardBenefits">
+                    <!-- … -->
+                    <Grid>
+                        <!-- Ellipses y TextBlocks idénticos -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Ellipse Width="130" Height="130" Fill="#154c79">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="1.5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <Ellipse Width="110" Height="110" Fill="#1e81b0"/>
+                        <Ellipse Width="80" Height="80">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#abdbe3" Offset="0"/>
+                                    <GradientStop Color="#76b5c5" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                            <TextBlock Text="🏷️"
+            FontSize="36"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="White"/>
+                        <TextBlock Grid.Row="1"
+            Text="Promociones"
+            FontSize="20"
+            FontWeight="SemiBold"
+            Foreground="White"
+            HorizontalAlignment="Center"
+            Margin="0,10,0,0"/>
+                        <TextBlock Grid.Row="2"
+            Text="Accede a las promociones vigentes"
+            FontSize="13"
+            Foreground="#AAAAAA"
+            HorizontalAlignment="Center"
+            TextAlignment="Center"
+            TextWrapping="Wrap"
+            Margin="20,0,20,0"/>
+                    </Grid>
+                </Button>
+
+                <!-- Beneficios extra / Otro -->
+                    <Button Height="250" Style="{StaticResource OptionCardButtonStyle}"
+            Command="{Binding NavigateSyncCommand}"
+            CommandParameter="DashboardBenefits">
+                    <!-- … -->
+                    <Grid>
+                        <!-- Ellipses y TextBlocks idénticos -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                            <Ellipse Width="130" Height="130" Fill="#051465">
+                            <Ellipse.Effect>
+                                <BlurEffect Radius="1.5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                            <Ellipse Width="110" Height="110" Fill="#0e45c4"/>
+                        <Ellipse Width="80" Height="80">
+                            <Ellipse.Fill>
+                                <LinearGradientBrush>
+                                        <GradientStop Color="#4584c7" Offset="0"/>
+                                        <GradientStop Color="#0176ab" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                            <TextBlock Text="🎯"
+                            FontSize="36"
+                                   FontFamily="Segoe UI Emoji"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="White"/>
+                                                    <TextBlock Grid.Row="1"
+                            Text="Promociones"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+                            Margin="0,10,0,0"/>
+                                                    <TextBlock Grid.Row="2"
+                            Text="Accede a las promociones vigentes"
+                            FontSize="13"
+                            Foreground="#AAAAAA"
+                            HorizontalAlignment="Center"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap"
+                            Margin="20,0,20,0"/>
+                    </Grid>
+                </Button>
+                <!-- Si hay más, añádelos aquí -->
+            </UniformGrid>
+                <!-- Botón Volver, sólo visible cuando estamos viendo contenido -->
+                <Button Content="← Volver al menú"
+                Style="{StaticResource ActionButtonStyle}"
+                Command="{Binding BackCommand}"
+                Visibility="{Binding IsContentVisible, Converter={StaticResource BoolToVis}}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Height="40"
+                Width="140"        
+                Margin="20" />
+                <!-- Región de contenido dinámico -->
+            <ContentControl Width="1000" Height="600" x:Name="ContentArea"
+                            Visibility="{Binding IsContentVisible, Converter={StaticResource BoolToVis}}"
+                            Background="Transparent"/>
+        </Grid>
+    </Grid>
+</Border>
+</Window>

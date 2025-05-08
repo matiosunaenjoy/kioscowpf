@@ -1,0 +1,122 @@
+﻿
+
+<Window x:Class="KioscoAutogestion.Baluma.Casino.App.Views.Auth.PinEntryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ingrese su PIN"
+        Height="450" Width="350"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="#151723">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+               Text="Ingrese su PIN"
+               FontSize="18"
+               Foreground="White"
+               Margin="20"
+               HorizontalAlignment="Center"/>
+
+        <Border Grid.Row="1"
+            BorderBrush="#CCCCCC"
+            BorderThickness="1"
+            CornerRadius="4"
+            Margin="20,10">
+            <TextBlock Text="{Binding DisplayPin}"
+                 Height="40"
+                 FontSize="20"
+                 Foreground="White"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock Grid.Row="2"
+               Text="{Binding ErrorMessage}"
+               Foreground="Red"
+               Margin="20,5"
+               HorizontalAlignment="Center"
+               Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
+
+        <Grid Grid.Row="3" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Botones numéricos con estilo de teclado -->
+            <Button Grid.Row="0" Grid.Column="0"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="1"
+              Command="{Binding NumberCommand}"
+              CommandParameter="1"/>
+            <Button Grid.Row="0" Grid.Column="1"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="2"
+              Command="{Binding NumberCommand}"
+              CommandParameter="2"/>
+            <Button Grid.Row="0" Grid.Column="2"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="3"
+              Command="{Binding NumberCommand}"
+              CommandParameter="3"/>
+            <Button Grid.Row="1" Grid.Column="0"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="4"
+              Command="{Binding NumberCommand}"
+              CommandParameter="4"/>
+             <Button Grid.Row="1" Grid.Column="1"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="5"
+              Command="{Binding NumberCommand}"
+              CommandParameter="5"/>
+             <Button Grid.Row="1" Grid.Column="2"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="6"
+              Command="{Binding NumberCommand}"
+              CommandParameter="6"/>
+            <Button Grid.Row="2" Grid.Column="0"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="7"
+              Command="{Binding NumberCommand}"
+              CommandParameter="7"/>
+                        <Button Grid.Row="2" Grid.Column="1"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="8"
+              Command="{Binding NumberCommand}"
+              CommandParameter="8"/>
+            <Button Grid.Row="2" Grid.Column="2"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="9"
+              Command="{Binding NumberCommand}"
+              CommandParameter="9"/>
+            <!-- Fila de control -->
+            <Button Grid.Row="3" Grid.Column="0"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="⌫"
+              Command="{Binding DeleteCommand}"/>
+            <Button Grid.Row="3" Grid.Column="1"
+              Style="{StaticResource KeyboardButtonStyle}"
+              Content="0"
+              Command="{Binding NumberCommand}"
+              CommandParameter="0"/>
+            <Button Grid.Row="3" Grid.Column="2"
+              Style="{StaticResource ActionButtonStyle}"
+              Content="↵"
+              Command="{Binding EnterCommand}"/>
+        </Grid>
+    </Grid>
+</Window>

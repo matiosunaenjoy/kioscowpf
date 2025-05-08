@@ -1,0 +1,329 @@
+﻿<Window x:Class="KioscoAutogestion.Baluma.Casino.App.Views.DashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Enjoy Punta del Este - Centro de Canje" 
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+                WindowState="Maximized"
+            WindowStyle="None"
+            AllowsTransparency="True"
+            Background="Transparent"
+            ResizeMode="NoResize"
+        xmlns:views="clr-namespace:KioscoAutogestion.Baluma.Casino.App.Views">
+    
+    <Window.Resources>
+        <!-- Recursos específicos de la ventana -->
+    </Window.Resources>
+
+    <Border CornerRadius="0" Background="{StaticResource BackgroundBrush}" BorderThickness="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <!-- Header -->
+                <RowDefinition Height="*"/>
+                <!-- Content -->
+            </Grid.RowDefinitions>
+
+            <!-- Header con título y controles de ventana -->
+            <Border Grid.Row="0" Background="{StaticResource HeaderGradientBrush}" CornerRadius="10,10,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Logo y título -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="15,0,0,0">
+                        <Image Source="/Assets/enjoy_logo.png" Height="40" Margin="0,0,10,0"/>
+                        <TextBlock Text="Centro de Canje" 
+                                   FontSize="20"
+                                   FontWeight="Medium"
+                                   Foreground="{StaticResource TextBrush}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Usuario -->
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Greeting}"  
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource TextBrush}"/>
+                        <TextBlock Text="{Binding PointsDisplay}"
+                                   FontSize="12"
+                                   Foreground="{StaticResource SecondaryTextBrush}"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Banderas de idioma y botones de control -->
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,15,0">
+                        <!-- Botones de idioma -->
+                        <Button Width="40" Height="40" Margin="5,0" BorderThickness="0" Background="Transparent">
+                            <Ellipse Width="30" Height="30">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/es_spain_esp_flag_icon_255823.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Button>
+                        <Button Width="40" Height="40" Margin="5,0" BorderThickness="0" Background="Transparent">
+                            <Ellipse Width="30" Height="30">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/brazil_flag_icon_228666.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Button>
+                        <Button Width="40" Height="40" Margin="5,0" BorderThickness="0" Background="Transparent">
+                            <Ellipse Width="30" Height="30">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/usa_us_america_flag_united_states_icon_255810.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Button>
+
+
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Contenido principal -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <!-- Menú lateral -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Área de contenido -->
+                </Grid.ColumnDefinitions>
+
+
+
+                <!-- Reemplaza el menú lateral completo en MainWindow.xaml -->
+                <Border Grid.Column="0" CornerRadius="0,0,0,10">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#1A1A2E" Offset="0"/>
+                            <GradientStop Color="#1E1E2D" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <StackPanel>
+                        <!-- Logo del sistema -->
+                        <Border Margin="0,0,0,15" HorizontalAlignment="Center">
+                            
+                        </Border>
+
+                        <!-- Tarjeta para Canje de Puntos -->
+                        <Border Style="{StaticResource MenuCardStyle}" MouseDown="NavigateToPointsExchange">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" HorizontalAlignment="Center">
+                                    <!-- Círculo exterior difuminado verde -->
+                                    <Ellipse Style="{StaticResource OuterCircleStyle}">
+                                        <Ellipse.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#32CD32" Offset="0"/>
+                                                <GradientStop Color="#00FFCC" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Ellipse.Stroke>
+                                    </Ellipse>
+
+                                    <!-- Círculo interior verde con icono -->
+                                    <Border Style="{StaticResource CircularIconStyle}">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#32CD32" Offset="0"/>
+                                                <GradientStop Color="#00FFCC" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+                                        <!-- Check mark icon -->
+                                        <Path Style="{StaticResource IconPathStyle}" Data="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock Grid.Row="1" Style="{StaticResource MenuTitleStyle}" Text="Canje de Puntos"/>
+
+                             
+                            </Grid>
+                        </Border>
+
+                        <!-- Tarjeta para La Ruta Enjoy -->
+                        <Border Style="{StaticResource MenuCardStyle}" MouseDown="NavigateToEnjoyRoute">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" HorizontalAlignment="Center">
+                                    <!-- Círculo exterior difuminado rosa/morado -->
+                                    <Ellipse Style="{StaticResource OuterCircleStyle}">
+                                        <Ellipse.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#FF3366" Offset="0"/>
+                                                <GradientStop Color="#9933FF" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Ellipse.Stroke>
+                                    </Ellipse>
+
+                                    <!-- Círculo interior rosa con icono -->
+                                    <Border Style="{StaticResource CircularIconStyle}">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#FF3366" Offset="0"/>
+                                                <GradientStop Color="#9933FF" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+                                        <!-- Lightning icon -->
+                                        <Path Style="{StaticResource IconPathStyle}" Data="M11,15H6L13,1V9H18L11,23V15Z"/>
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock Grid.Row="1" Style="{StaticResource MenuTitleStyle}" Text="La Ruta Enjoy"/>
+
+                                
+                            </Grid>
+                        </Border>
+
+                        <!-- Tarjeta para Canje de Premios -->
+                        <Border Style="{StaticResource MenuCardStyle}" MouseDown="NavigateToPrizesExchange">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" HorizontalAlignment="Center">
+                                    <!-- Círculo exterior difuminado naranja/dorado -->
+                                    <Ellipse Style="{StaticResource OuterCircleStyle}">
+                                        <Ellipse.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#FFCC33" Offset="0"/>
+                                                <GradientStop Color="#FF9933" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Ellipse.Stroke>
+                                    </Ellipse>
+
+                                    <!-- Círculo interior dorado con icono -->
+                                    <Border Style="{StaticResource CircularIconStyle}">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#FFCC33" Offset="0"/>
+                                                <GradientStop Color="#FF9933" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+                                        <!-- Star icon -->
+                                        <Path Style="{StaticResource IconPathStyle}" Data="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/>
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock Grid.Row="1" Style="{StaticResource MenuTitleStyle}" Text="Canje de Premios"/>
+
+
+                                <!-- Badge para notificaciones -->
+                                <Border Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Width="24" Height="24" Background="#FF3366" CornerRadius="12"
+                            Margin="0,-5,-5,0">
+                                    <TextBlock Text="9+" Foreground="White" FontSize="10" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- Tarjeta para Beneficios -->
+                        <Border Style="{StaticResource MenuCardStyle}" MouseDown="NavigateToBenefits">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" HorizontalAlignment="Center">
+                                    <!-- Círculo exterior difuminado azul -->
+                                    <Ellipse Style="{StaticResource OuterCircleStyle}">
+                                        <Ellipse.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#3399FF" Offset="0"/>
+                                                <GradientStop Color="#33CCFF" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Ellipse.Stroke>
+                                    </Ellipse>
+
+                                    <!-- Círculo interior azul con icono -->
+                                    <Border Style="{StaticResource CircularIconStyle}">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#3399FF" Offset="0"/>
+                                                <GradientStop Color="#33CCFF" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+                                        <!-- Settings icon -->
+                                        <Path Style="{StaticResource IconPathStyle}" Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock Grid.Row="1" Style="{StaticResource MenuTitleStyle}" Text="Beneficios"/>
+
+                                <!--<TextBlock Grid.Row="2" Style="{StaticResource MenuDescriptionStyle}" 
+                               Text="Conoce los beneficios exclusivos para miembros"/>-->
+                            </Grid>
+                        </Border>
+
+                        <!-- Botón de salida -->
+                        <Border Style="{StaticResource MenuCardStyle}" MouseDown="ExitApplication" Margin="15,8,15,20">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" HorizontalAlignment="Center">
+                                    <!-- Círculo exterior difuminado rojo -->
+                                    <Ellipse Style="{StaticResource OuterCircleStyle}">
+                                        <Ellipse.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#FF3333" Offset="0"/>
+                                                <GradientStop Color="#CC3366" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Ellipse.Stroke>
+                                    </Ellipse>
+
+                                    <!-- Círculo interior rojo con icono -->
+                                    <Border Style="{StaticResource CircularIconStyle}">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#FF3333" Offset="0"/>
+                                                <GradientStop Color="#CC3366" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+                                        <!-- Exit icon -->
+                                        <Path Style="{StaticResource IconPathStyle}" Data="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z"/>
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock Grid.Row="1" Style="{StaticResource MenuTitleStyle}" Text="Salir"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+                <Grid Grid.Column="1">
+                    <ContentControl x:Name="MainContentRegion"/>
+                </Grid>
+                
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
+
+
