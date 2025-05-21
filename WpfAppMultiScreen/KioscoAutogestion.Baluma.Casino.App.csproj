@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Player\FakePlayerService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Images\brazil_flag_icon_228666.png" />
     <None Remove="Images\card-color.png" />
     <None Remove="Images\card-ins.png" />

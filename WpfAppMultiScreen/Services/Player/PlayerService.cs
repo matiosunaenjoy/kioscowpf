@@ -1,6 +1,7 @@
 ﻿using KioscoAutogestion.Baluma.Casino.App.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -23,20 +24,35 @@ namespace KioscoAutogestion.Baluma.Casino.App.Services.Player
             _http.BaseAddress = new Uri("https://svc.baluma.com.uy/");
         }
 
-        public async Task<PlayerDataResponse> GetPlayerDataAsync()
+
+
+        public async Task<PlayerResponse> GetPlayerDataAsync()
         {
-            var token = _session.CurrentClient?.Token;
+            var token = _session.CurrentClient?.Token?.Trim();
             if (string.IsNullOrEmpty(token))
                 return null;
 
-            using var req = new HttpRequestMessage(HttpMethod.Get, "playerService/api/player/getplayerdata");
-            req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            using var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "/playerService/api/player/getplayerdata");
+            req.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+            req.Headers.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
             var resp = await _http.SendAsync(req);
             if (!resp.IsSuccessStatusCode)
                 return null;
 
-            return await resp.Content.ReadFromJsonAsync<PlayerDataResponse>();
+            var wrapper = await resp.Content
+                .ReadFromJsonAsync<PlayerDataWrapper>();
+            if (wrapper == null || wrapper.Status != "success")
+                return null;
+
+            // Aquí `wrapper.Data.Response` ya es un PlayerResponse
+            return wrapper.Data.Response;
         }
+
+
     }
 }

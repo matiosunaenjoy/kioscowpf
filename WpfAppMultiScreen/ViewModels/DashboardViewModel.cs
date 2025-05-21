@@ -160,29 +160,65 @@ namespace KioscoAutogestion.Baluma.Casino.App.ViewModels
                 ? "Cargando puntos..."
                 : $"Puntos acumulados: {AccumulatedPoints}";
 
+        //private async Task LoadPlayerDataAsync()
+        //{
+        //    IsLoading = true;
+        //    try
+        //    {
+        //        var response = await _playerService.GetPlayerDataAsync();
+        //        if (response != null && response.Status == "success")
+        //        {
+        //            Player = response.Data.Response;
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("No se pudo cargar los datos del jugador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        }
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        MessageBox.Show($"Error al obtener datos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //    finally
+        //    {
+        //        IsLoading = false;
+        //    }
+        //}
+
         private async Task LoadPlayerDataAsync()
         {
             IsLoading = true;
             try
             {
-                var response = await _playerService.GetPlayerDataAsync();
-                if (response != null && response.Status == "success")
+                // Ahora GetPlayerDataAsync() ya devuelve PlayerDataResponse o null
+                var player = await _playerService.GetPlayerDataAsync();
+                if (player != null)
                 {
-                    Player = response.Data.Response;
+                    // Asignamos directamente el DTO plano al VM
+                    Player = player;
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo cargar los datos del jugador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(
+                        "No se pudo cargar los datos del jugador.",
+                        "Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Error al obtener datos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    $"Error al obtener datos: {ex.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
             finally
             {
                 IsLoading = false;
             }
         }
+
     }
 }

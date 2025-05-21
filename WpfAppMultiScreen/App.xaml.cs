@@ -44,17 +44,17 @@ namespace KioscoAutogestion.Baluma.Casino.App
               });
 
             // 4) Typed HttpClient para Player (sí inyecta token)
-            //services
-            //  .AddHttpClient<IPlayerService, PlayerService>(client =>
-            //  {
-            //      client.BaseAddress = new Uri("https://svc.baluma.com.uy/");
-            //      client.DefaultRequestHeaders.Accept.Add(
-            //        new MediaTypeWithQualityHeaderValue("application/json"));
-            //  })
-            //  .AddHttpMessageHandler<AuthHeaderHandler>();
+            services
+              .AddHttpClient<IPlayerService, PlayerService>(client =>
+              {
+                  client.BaseAddress = new Uri("https://svc.baluma.com.uy/");
+                  client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+              })
+              .AddHttpMessageHandler<AuthHeaderHandler>();
 
             // 5) En su lugar, registra el FakePlayerService:
-            services.AddSingleton<IPlayerService, FakePlayerService>();
+            // services.AddSingleton<IPlayerService, FakePlayerService>();
 
             // 5) Mock o reales para otros servicios
             // ... cualquier otro
@@ -63,6 +63,7 @@ namespace KioscoAutogestion.Baluma.Casino.App
             services.AddSingleton<IQRCodeReaderService, QRCodeReaderService>();
             services.AddSingleton<INFCReaderService, NFCReaderService>();
             services.AddSingleton<IDialogService, DialogService>();
+            //services.AddSingleton<ISessionService, SessionService>();
 
             // 6) ViewModels
             //services.AddTransient<LoginViewModel>();
@@ -74,7 +75,8 @@ namespace KioscoAutogestion.Baluma.Casino.App
                     sp.GetRequiredService<IMagneticCardReaderService>(),
                     sp.GetRequiredService<IQRCodeReaderService>(),
                     sp.GetRequiredService<INFCReaderService>(),
-                    sp.GetRequiredService<IDialogService>()
+                    sp.GetRequiredService<IDialogService>(),
+                    sp.GetRequiredService<ISessionService>()
                 ));
 
             services.AddTransient<RegisterViewModel>();

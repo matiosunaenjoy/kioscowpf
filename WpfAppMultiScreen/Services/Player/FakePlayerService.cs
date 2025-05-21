@@ -16,54 +16,93 @@ namespace KioscoAutogestion.Baluma.Casino.App.Services.Player
             _session = session;
         }
 
+        //    public Task<PlayerDataResponse> GetPlayerDataAsync()
+        //    {
+        //        // Obtiene el número de usuario de la sesión (o 0 si no hay)
+        //        var userNumber = _session.CurrentClient?.UserNumber ?? 0;
+
+        //        var response = new PlayerDataResponse
+        //        {
+        //            Status = "OK",
+        //            Data = new PlayerDataWrapper
+        //            {
+        //                Message = "Datos de prueba cargados",
+        //                Response = new PlayerResponse
+        //                {
+        //                    Acct = "ACCT" + userNumber,
+        //                    FirstName = "Usuario" + userNumber,
+        //                    DisplayName = "Usuario de Prueba",
+        //                    Category = "Gold",
+        //                    HasUncompletedActiveSurveys = false,
+        //                    CategoryName = "Oro",
+        //                    Balances = new Balances
+        //                    {
+        //                        PointsBal = 12345
+        //                    },
+        //                    CategoryPoints = new CategoryPoints
+        //                    {
+        //                        FirstDay = DateTime.Today.AddDays(-30),
+        //                        LastDay = DateTime.Today,
+        //                        CategoryPointsInt = 1500
+        //                    },
+        //                    CurrentNextCategory = new CurrentNextCategory
+        //                    {
+        //                        CurrentCategory = "Oro",
+        //                        CurrentCategoryPointsFrom = 1000,
+        //                        CurrentCategoryPointsTo = 2000,
+        //                        CurrentCategoryPointsForChange = 2000,
+        //                        NextCategory = "Platino",
+        //                        NextCategoryPointsFrom = 2000,
+        //                        NextCategoryPointsTo = 3000,
+        //                        NextCategoryPointsForChange = 3000
+        //                    }
+        //                }
+        //            },
+        //            Error = null
+        //        };
+
+        //        return Task.FromResult(response);
+        //    }
+        //}
         public Task<PlayerDataResponse> GetPlayerDataAsync()
         {
             // Obtiene el número de usuario de la sesión (o 0 si no hay)
             var userNumber = _session.CurrentClient?.UserNumber ?? 0;
 
+            // Crea directamente el DTO que ahora tu PlayerService espera:
             var response = new PlayerDataResponse
             {
-                Status = "OK",
-                Data = new PlayerDataWrapper
+                Acct = "ACCT" + userNumber,
+                FirstName = "Usuario" + userNumber,
+                DisplayName = "Usuario de Prueba",
+                Category = "Gold",
+                HasUncompletedActiveSurveys = false,
+                CategoryName = "Oro",
+                Balances = new Balances
                 {
-                    Message = "Datos de prueba cargados",
-                    Response = new PlayerResponse
-                    {
-                        Acct = "ACCT" + userNumber,
-                        FirstName = "Usuario" + userNumber,
-                        DisplayName = "Usuario de Prueba",
-                        Category = "Gold",
-                        HasUncompletedActiveSurveys = false,
-                        CategoryName = "Oro",
-                        Balances = new Balances
-                        {
-                            PointsBal = 12345
-                        },
-                        CategoryPoints = new CategoryPoints
-                        {
-                            FirstDay = DateTime.Today.AddDays(-30),
-                            LastDay = DateTime.Today,
-                            CategoryPointsInt = 1500
-                        },
-                        CurrentNextCategory = new CurrentNextCategory
-                        {
-                            CurrentCategory = "Oro",
-                            CurrentCategoryPointsFrom = 1000,
-                            CurrentCategoryPointsTo = 2000,
-                            CurrentCategoryPointsForChange = 2000,
-                            NextCategory = "Platino",
-                            NextCategoryPointsFrom = 2000,
-                            NextCategoryPointsTo = 3000,
-                            NextCategoryPointsForChange = 3000
-                        }
-                    }
+                    PointsBal = 12345
                 },
-                Error = null
+                CategoryPoints = new CategoryPoints
+                {
+                    FirstDay = DateTime.Today.AddDays(-30),
+                    LastDay = DateTime.Today,
+                    CategoryPoint = 1500
+                },
+                CurrentNextCategory = new CurrentNextCategory
+                {
+                    CurrentCategory = "Oro",
+                    CurrentCategoryPointsFrom = 1000,
+                    CurrentCategoryPointsTo = 2000,
+                    CurrentCategoryPointsForChange = 2000,
+                    NextCategory = "Platino",
+                    NextCategoryPointsFrom = 2000,
+                    NextCategoryPointsTo = 3000,
+                    NextCategoryPointsForChange = 3000
+                }
             };
 
             return Task.FromResult(response);
         }
     }
 
-
-}
+    }

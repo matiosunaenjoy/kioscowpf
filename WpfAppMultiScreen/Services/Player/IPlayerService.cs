@@ -9,6 +9,6 @@ namespace KioscoAutogestion.Baluma.Casino.App.Services.Player
 {
     public interface IPlayerService
     {
-        Task<PlayerDataResponse> GetPlayerDataAsync();
+        Task<PlayerResponse> GetPlayerDataAsync();
     }
 }

@@ -21,7 +21,6 @@ namespace KioscoAutogestion.Baluma.Casino.App
             InitializeComponent();
             _nav = nav;
             DataContext = _vm = vm;
-            Loaded += (s, e) => vm.StartListening();
         }
 
        
